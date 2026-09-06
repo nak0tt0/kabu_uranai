@@ -1,0 +1,13 @@
+<div style="padding: 20px;">
+
+  <h2>マイページ</h2>
+
+  <% if @user %>
+    <p>ようこそ、<strong><%= @user.name %></strong> さん！</p>
+    <p>メールアドレス: <%= @user.email %></p>
+    <p>My投資憲章: <%= @user.investment_policy %></p>
+  <% else %>
+    <p>ログインしていません。</p>
+  <% end %>
+
+</div>

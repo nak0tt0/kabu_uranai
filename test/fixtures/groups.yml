@@ -1,0 +1,9 @@
+# test/fixtures/groups.yml
+
+one:
+  user: one
+  name: "短期スイング"
+
+two:
+  user: two
+  name: "長期配当"
