@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  group: one
+  ticker_symbol: MyString
+  name: MyString
+  status: 1
+  shares: 9.99
+  acquisition_price: 9.99
+  purchase_motivation: MyText
+  exit_scenario: MyText
+  fomo_score: 1
+  fomo_advice: MyText
+
+two:
+  user: two
+  group: two
+  ticker_symbol: MyString
+  name: MyString
+  status: 1
+  shares: 9.99
+  acquisition_price: 9.99
+  purchase_motivation: MyText
+  exit_scenario: MyText
+  fomo_score: 1
+  fomo_advice: MyText
