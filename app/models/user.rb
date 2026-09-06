@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
 
-  enum :role, { general: 0, admin: 1 }, default: 0
+  enum(:role, { general: 0, admin: 1 }, default: :general)
 
   has_many :stocks, dependent: :destroy
   has_many :groups, dependent: :destroy

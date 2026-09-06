@@ -1,5 +1,5 @@
 class Stock < ApplicationRecord
-  enum status: { holding: 0, pending: 1, sold: 2 }
+  enum(:status, { holding: 0, pending: 1, sold: 2 }, default: :holding)
 
   belongs_to :user
   belongs_to :group, optional: true
