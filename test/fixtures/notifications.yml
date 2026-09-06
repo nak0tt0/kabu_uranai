@@ -1,13 +1,14 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/notifications.yml
 
 one:
   user: one
-  action_type: MyString
-  message: MyText
+  action_type: "earnings_alert"
+  message: "トヨタ自動車（7203.T）の決算発表が明日予定されています。"
   read_status: false
 
 two:
   user: two
-  action_type: MyString
-  message: MyText
-  read_status: false
+  action_type: "fomo_warning"
+  message: "衝動買いの可能性が高い銘柄が検出されました。購入動機を見直してください。"
+  read_status: true
+  

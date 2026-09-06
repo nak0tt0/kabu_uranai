@@ -1,27 +1,27 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/stocks.yml
 
 one:
   user: one
   group: one
-  ticker_symbol: MyString
-  name: MyString
-  status: 1
-  shares: 9.99
-  acquisition_price: 9.99
-  purchase_motivation: MyText
-  exit_scenario: MyText
-  fomo_score: 1
-  fomo_advice: MyText
+  ticker_symbol: "7203.T"
+  name: "トヨタ自動車"
+  status: 0
+  shares: 100
+  acquisition_price: 2500.00
+  purchase_motivation: "中長期の業績拡大を期待して購入。"
+  exit_scenario: "主要市場シェアが悪化した時。"
+  fomo_score: 20
+  fomo_advice: "冷静な判断です。"
 
 two:
   user: two
   group: two
-  ticker_symbol: MyString
-  name: MyString
-  status: 1
-  shares: 9.99
-  acquisition_price: 9.99
-  purchase_motivation: MyText
-  exit_scenario: MyText
-  fomo_score: 1
-  fomo_advice: MyText
+  ticker_symbol: "AAPL"
+  name: "Apple Inc."
+  status: 0
+  shares: 10
+  acquisition_price: 180.00
+  purchase_motivation: "新製品エコシステムの強さに期待。"
+  exit_scenario: "売上高が前年割れを継続した時。"
+  fomo_score: 15
+  fomo_advice: "計画通りの設定です。"
