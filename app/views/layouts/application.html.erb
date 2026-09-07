@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Kabuuranai" %></title>
+    <title><%= content_for(:title) || "かぶうらない（仮）" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Kabuuranai">
@@ -24,6 +24,20 @@
   </head>
 
   <body>
+    <%# フラッシュメッセージ（通知） %>
+    <% if flash[:notice] %>
+      <div style="padding: 10px; background-color: #d4edda; color: #155724; margin-bottom: 10px;">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div style="padding: 10px; background-color: #f8d7da; color: #721c24; margin-bottom: 10px;">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+
+    <%# ここに各画面（homes/top や mypage など）の中身が読み込まれます %>
     <%= yield %>
   </body>
 </html>

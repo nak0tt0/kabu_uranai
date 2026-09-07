@@ -1,0 +1,5 @@
+<div style="padding: 20px;">
+  <h2>管理者ダッシュボード</h2>
+  <p>ログイン中の管理者: <%= current_admin.email %></p>
+  <%= button_to "管理者ログアウト", admin_logout_path, method: :delete %>
+</div>
