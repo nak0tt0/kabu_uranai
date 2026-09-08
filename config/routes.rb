@@ -8,13 +8,16 @@ Rails.application.routes.draw do
   post "signup", to: "registrations#create"
 
   # 一般ユーザー用 ログイン / ログアウト / ゲストログイン
-  get    "login",       to: "sessions#new"
-  post   "login",       to: "sessions#create"
-  delete "logout",      to: "sessions#destroy"
+  get    "login",        to: "sessions#new"
+  post   "login",        to: "sessions#create"
+  delete "logout",       to: "sessions#destroy"
   post   "guest_login", to: "sessions#guest_login"
 
   # マイページ
   get "mypage", to: "users#show"
+
+  # 銘柄管理機能（CRUD）
+  resources :stocks
 
   # 管理者専用エリア (/admin/...)
   namespace :admin do
