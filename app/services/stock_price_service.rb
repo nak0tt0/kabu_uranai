@@ -10,11 +10,11 @@ class StockPriceService
   def fetch_data
     return nil if @formatted_symbol.blank?
 
-    script_path = Rails.root.join('lib', 'scripts', 'fetch_price.py')
-    # 作成した仮想環境(.venv)内の python を使用する
-    python_path = Rails.root.join('.venv', 'bin', 'python')
+    script_path = Rails.root.join('lib', 'scripts', 'fetch_price.py').to_s
+    python_path = Rails.root.join('.venv', 'bin', 'python').to_s
 
-    stdout, stderr, status = Open3.capture3("#{python_path} #{script_path} #{@formatted_symbol}")
+    # コマンドと引数を分離して渡すことでコマンドインジェクションを防ぐ
+    stdout, stderr, status = Open3.capture3(python_path, script_path, @formatted_symbol)
 
     unless status.success?
       Rails.logger.error("yfinance取得エラー stderr: #{stderr}")
