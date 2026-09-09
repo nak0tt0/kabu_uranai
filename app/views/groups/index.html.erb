@@ -1,0 +1,49 @@
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2>グループ（ジャンル・ポートフォリオ分類）管理</h2>
+    <%= link_to "マイページに戻る", mypage_path, style: "color: #007bff; text-decoration: none;" %>
+  </div>
+
+  <% if flash[:notice].present? %>
+    <p style="color: green;"><%= flash[:notice] %></p>
+  <% end %>
+
+  <!-- 新規作成フォーム -->
+  <div style="background-color: #f8f9fa; padding: 15px; border-radius: 6px; margin-bottom: 25px;">
+    <h3 style="margin-top: 0;">新しいグループを作成</h3>
+    <%= form_with model: @group, local: true, style: "display: flex; gap: 10px;" do |f| %>
+      <%= f.text_field :name, placeholder: "例: 高配当株、スイングトレード、米国株", required: true, style: "flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" %>
+      <%= f.submit "作成する", style: "padding: 8px 16px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;" %>
+    <% end %>
+  </div>
+
+  <!-- グループ一覧 -->
+  <h3>登録済みグループ一覧</h3>
+  <% if @groups.any? %>
+    <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; text-align: left;">
+      <thead>
+        <tr style="background-color: #f8f9fa;">
+          <th>グループ名</th>
+          <th>紐づく銘柄数</th>
+          <th>作成日</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @groups.each do |group| %>
+          <tr>
+            <td><strong><%= group.name %></strong></td>
+            <td><%= group.stocks.count %> 件</td>
+            <td><%= group.created_at.strftime("%Y/%m/%d") %></td>
+            <td>
+              <%= link_to "編集", edit_group_path(group), style: "color: #ffc107; margin-right: 10px;" %>
+              <%= button_to "削除", group_path(group), method: :delete, data: { turbo_confirm: "このグループを削除しますか？（※所属する銘柄自体は削除されません）" }, style: "background: none; border: none; color: #dc3545; cursor: pointer; text-decoration: underline; padding: 0; display: inline;" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p style="color: #6c757d;">まだグループは作成されていません。</p>
+  <% end %>
+</div>

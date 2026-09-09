@@ -1,0 +1,46 @@
+<div style="padding: 20px; max-width: 600px; margin: 0 auto; text-align: center;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2>投資の木（育成ステータス）</h2>
+    <%= link_to "マイページに戻る", mypage_path, style: "color: #007bff; text-decoration: none;" %>
+  </div>
+
+  <% if flash[:notice].present? %>
+    <p style="color: green; background-color: #e6ffe6; padding: 10px; border-radius: 4px;"><%= flash[:notice] %></p>
+  <% end %>
+  <% if flash[:alert].present? %>
+    <p style="color: red; background-color: #ffe6e6; padding: 10px; border-radius: 4px;"><%= flash[:alert] %></p>
+  <% end %>
+
+  <!-- 木のグラフィック表示エリア -->
+  <div style="background-color: #f4f9f4; border: 2px dashed #28a745; border-radius: 12px; padding: 30px; margin-bottom: 20px;">
+    <div style="font-size: 80px; margin-bottom: 10px;">
+      <% if @plant_growth.level == 1 %>
+        🌱
+      <% elsif @plant_growth.level == 2 %>
+        🌿
+      <% elsif @plant_growth.level >= 3 %>
+        🌳
+      <% end %>
+    </div>
+    <h3 style="margin: 5px 0;">レベル <%= @plant_growth.level %></h3>
+    <p style="color: #6c757d; font-size: 14px;">ルールを守った投資・振り返りを行うことで木が成長します。</p>
+  </div>
+
+  <!-- ステータス情報 -->
+  <div style="display: flex; justify-content: space-around; background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+    <div>
+      <span style="font-size: 12px; color: #6c757d;">現在の経験値</span>
+      <p style="font-size: 20px; font-weight: bold; margin: 5px 0; color: #28a745;"><%= @plant_growth.experience_point %> EXP</p>
+    </div>
+    <div style="border-left: 1px solid #ccc;"></div>
+    <div>
+      <span style="font-size: 12px; color: #6c757d;">収穫した実</span>
+      <p style="font-size: 20px; font-weight: bold; margin: 5px 0; color: #fd7e14;">🍎 <%= @plant_growth.fruit_count %> 個</p>
+    </div>
+  </div>
+
+  <!-- 収穫ボタン -->
+  <div>
+    <%= button_to "実を収穫する (50 EXP消費)", harvest_plant_growth_path, method: :post, style: "padding: 12px 24px; background-color: #28a745; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer;" %>
+  </div>
+</div>
