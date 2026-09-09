@@ -1,9 +1,14 @@
-<div style="text-align: center; margin-top: 50px;">
+<div style="text-align: center; margin-top: 50px; padding: 20px;">
   <h1>かぶうらない（仮）へようこそ</h1>
   <p>感情に惑わされない投資をサポートするサービスです。</p>
 
   <div style="margin-top: 30px; display: flex; justify-content: center; gap: 15px;">
-    <%= link_to "新規会員登録はこちら", signup_path, style: "padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;" %>
-    <%= link_to "ログイン", login_path, style: "padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;" %>
+    <% if logged_in? %>
+      <%= link_to "マイページへ行く", mypage_path, style: "padding: 12px 24px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;" %>
+      <%= link_to "保有銘柄一覧を見る", stocks_path, style: "padding: 12px 24px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;" %>
+    <% else %>
+      <%= link_to "新規会員登録はこちら", signup_path, style: "padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;" %>
+      <%= link_to "ログイン", login_path, style: "padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;" %>
+    <% end %>
   </div>
 </div>

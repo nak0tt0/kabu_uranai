@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_07_182629) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_09_174621) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -38,6 +38,28 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_182629) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "plant_growths", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "experience_point", default: 0, null: false
+    t.integer "fruit_count", default: 0, null: false
+    t.integer "level", default: 1, null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_plant_growths_on_user_id", unique: true
+  end
+
+  create_table "post_mortems", force: :cascade do |t|
+    t.text "ai_review_comment"
+    t.datetime "created_at", null: false
+    t.text "exit_reason"
+    t.boolean "rule_followed", default: true
+    t.datetime "sold_at"
+    t.decimal "sold_price", precision: 10, scale: 2
+    t.bigint "stock_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_id"], name: "index_post_mortems_on_stock_id"
   end
 
   create_table "stock_tags", force: :cascade do |t|
@@ -87,6 +109,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_182629) do
 
   add_foreign_key "groups", "users"
   add_foreign_key "notifications", "users"
+  add_foreign_key "plant_growths", "users"
+  add_foreign_key "post_mortems", "stocks"
   add_foreign_key "stock_tags", "stocks"
   add_foreign_key "stock_tags", "tags"
   add_foreign_key "stocks", "groups"
