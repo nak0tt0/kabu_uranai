@@ -1,0 +1,36 @@
+<div style="padding: 20px; max-width: 1000px; margin: 0 auto;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2>登録ユーザー一覧</h2>
+    <%= link_to "ダッシュボードに戻る", admin_dashboard_path, style: "color: #007bff; text-decoration: none;" %>
+  </div>
+
+  <% if @users.any? %>
+    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+      <thead>
+        <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+          <th style="padding: 12px;">ID</th>
+          <th style="padding: 12px;">名前</th>
+          <th style="padding: 12px;">メールアドレス</th>
+          <th style="padding: 12px;">登録日</th>
+          <th style="padding: 12px; text-align: center;">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr style="border-bottom: 1px solid #dee2e6;">
+            <td style="padding: 12px;"><%= user.id %></td>
+            <td style="padding: 12px;"><%= user.name.presence || "未設定" %></td>
+            <td style="padding: 12px;"><%= user.email %></td>
+            <td style="padding: 12px;"><%= user.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+            <td style="padding: 12px; text-align: center;">
+              <%= link_to "詳細", admin_user_path(user), style: "margin-right: 10px; color: #17a2b8;" %>
+              <%= button_to "強制退会", admin_user_path(user), method: :delete, data: { turbo_confirm: "本当にこのユーザーを削除（強制退会）しますか？" }, style: "background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; display: inline-block;" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>登録されているユーザーはいません。</p>
+  <% end %>
+</div>

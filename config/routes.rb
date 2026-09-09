@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
     get "dashboard", to: "dashboards#show"
     resources :users, only: [:index, :show, :destroy]
+    resource  :profile, only: [:edit, :update]
   end
 
   # Rails標準のヘルスチェック用

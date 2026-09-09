@@ -1,5 +1,41 @@
-<div style="padding: 20px;">
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
   <h2>管理者ダッシュボード</h2>
-  <p>ログイン中の管理者: <%= current_admin.email %></p>
-  <%= button_to "管理者ログアウト", admin_logout_path, method: :delete %>
+
+  <!-- ログイン中の管理者情報 -->
+  <div style="margin-bottom: 20px; padding: 15px; background-color: #f8f9fa; border: 1px solid #ddd; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
+    <div>
+      <p style="margin: 0;">ログイン中の管理者: <strong><%= current_admin.email %></strong></p>
+    </div>
+    <div>
+      <%= button_to "管理者ログアウト", admin_logout_path, method: :delete, style: "background: none; border: none; color: #dc3545; cursor: pointer; text-decoration: underline;" %>
+    </div>
+  </div>
+
+  <!-- システム統計サマリー -->
+  <h3>システム統計</h3>
+  <div style="display: flex; gap: 15px; margin-bottom: 25px;">
+    <div style="flex: 1; border: 1px solid #ddd; padding: 15px; border-radius: 6px; text-align: center; background-color: #ffffff;">
+      <div style="font-size: 14px; color: #6c757d; margin-bottom: 5px;">総ユーザー数</div>
+      <div style="font-size: 28px; font-weight: bold; color: #333;"><%= @total_users_count %> <span style="font-size: 16px; font-weight: normal;">人</span></div>
+    </div>
+
+    <div style="flex: 1; border: 1px solid #ddd; padding: 15px; border-radius: 6px; text-align: center; background-color: #ffffff;">
+      <div style="font-size: 14px; color: #6c757d; margin-bottom: 5px;">アクティブユーザー数</div>
+      <div style="font-size: 28px; font-weight: bold; color: #28a745;"><%= @active_users_count %> <span style="font-size: 16px; font-weight: normal;">人</span></div>
+    </div>
+
+    <div style="flex: 1; border: 1px solid #ddd; padding: 15px; border-radius: 6px; text-align: center; background-color: #ffffff;">
+      <div style="font-size: 14px; color: #6c757d; margin-bottom: 5px;">総登録銘柄数</div>
+      <div style="font-size: 28px; font-weight: bold; color: #007bff;"><%= @total_stocks_count %> <span style="font-size: 16px; font-weight: normal;">件</span></div>
+    </div>
+  </div>
+
+  <hr style="margin: 20px 0;">
+
+  <!-- 管理メニュー -->
+  <h3>管理メニュー</h3>
+  <div style="display: flex; gap: 10px; margin-top: 15px;">
+    <%= link_to "ユーザー一覧", admin_users_path, style: "padding: 8px 16px; background-color: #f0f0f0; color: #333; text-decoration: none; border: 1px solid #ccc; border-radius: 4px; display: inline-block;" %>
+    <%= link_to "プロフィール編集", edit_admin_profile_path, style: "padding: 8px 16px; background-color: #f0f0f0; color: #333; text-decoration: none; border: 1px solid #ccc; border-radius: 4px; display: inline-block;" %>
+  </div>
 </div>
