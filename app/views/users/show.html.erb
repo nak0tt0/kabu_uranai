@@ -1,64 +1,15 @@
-<div style="padding: 20px; max-width: 900px; margin: 0 auto;">
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px;">
-    <div>
-      <h2 style="margin: 0 0 5px 0;">マイページ</h2>
-      <%= link_to "🏠 トップ画面へ戻る", root_path, style: "color: #6c757d; text-decoration: none; font-size: 14px;" %>
-    </div>
-    <div>
-      <span style="margin-right: 15px;">ようこそ、<strong><%= current_user.name %></strong> さん</span>
-      <%= link_to "ユーザー情報編集", edit_user_path, style: "padding: 6px 12px; background-color: #6c757d; color: white; border-radius: 4px; text-decoration: none; font-size: 14px; margin-right: 10px;" %>
-      <%= button_to "ログアウト", logout_path, method: :delete, style: "padding: 6px 12px; background-color: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; display: inline;" %>
-    </div>
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+  <h2>マイページ</h2>
+
+  <div style="background-color: #f8f9fa; padding: 15px; border-radius: 6px; margin-bottom: 20px;">
+    <h3>ユーザー情報</h3>
+    <p><strong>名前:</strong> <%= @user&.name || "未設定" %></p>
+    <p><strong>メールアドレス:</strong> <%= @user&.email %></p>
   </div>
 
-  <% if flash[:notice].present? %>
-    <p style="color: green; background-color: #e6ffe6; padding: 10px; border-radius: 4px; margin-bottom: 20px;"><%= flash[:notice] %></p>
-  <% end %>
-
-  <!-- メインコンテンツ / ダッシュボードメニュー -->
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 30px;">
-    
-    <!-- 1. 主役：保有銘柄一覧 -->
-    <div style="border: 2px solid #007bff; border-radius: 8px; padding: 20px; text-align: center; background-color: #f0f7ff;">
-      <h3 style="margin-top: 0; color: #007bff;">📈 保有銘柄一覧</h3>
-      <p style="font-size: 13px; color: #6c757d;">保有中の銘柄・現在価格・AI分析</p>
-      <%= link_to "銘柄一覧へ", stocks_path, style: "display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #007bff; color: white; border-radius: 4px; text-decoration: none; font-weight: bold;" %>
-    </div>
-
-    <!-- 2. 投資の木 -->
-    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; text-align: center; background-color: #f4f9f4;">
-      <h3 style="margin-top: 0;">🌱 投資の木</h3>
-      <p style="font-size: 13px; color: #6c757d;">成長ステータスと実の収穫</p>
-      <%= link_to "育成画面へ", plant_growth_path, style: "display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #28a745; color: white; border-radius: 4px; text-decoration: none; font-weight: bold;" %>
-    </div>
-
-    <!-- 3. 振り返りノート -->
-    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; text-align: center; background-color: #f8f9fa;">
-      <h3 style="margin-top: 0;">📓 振り返りノート</h3>
-      <p style="font-size: 13px; color: #6c757d;">売却済み銘柄の事後検証</p>
-      <%= link_to "ノート一覧へ", post_mortems_path, style: "display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #17a2b8; color: white; border-radius: 4px; text-decoration: none; font-weight: bold;" %>
-    </div>
-
-    <!-- 4. お知らせ・通知 -->
-    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; text-align: center; background-color: #f8f9fa;">
-      <h3 style="margin-top: 0;">🔔 お知らせ・通知</h3>
-      <p style="font-size: 13px; color: #6c757d;">AIアドバイスとシステム通知</p>
-      <%= link_to "通知一覧へ", notifications_path, style: "display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #ffc107; color: #212529; border-radius: 4px; text-decoration: none; font-weight: bold;" %>
-    </div>
-
-    <!-- 5. グループ管理 -->
-    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; text-align: center; background-color: #f8f9fa;">
-      <h3 style="margin-top: 0;">📁 グループ管理</h3>
-      <p style="font-size: 13px; color: #6c757d;">ポートフォリオ・ジャンル分類</p>
-      <%= link_to "グループ設定へ", groups_path, style: "display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #6c757d; color: white; border-radius: 4px; text-decoration: none; font-weight: bold;" %>
-    </div>
-
-    <!-- 6. タグ管理 -->
-    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; text-align: center; background-color: #f8f9fa;">
-      <h3 style="margin-top: 0;">🏷️ タグ管理</h3>
-      <p style="font-size: 13px; color: #6c757d;">銘柄ラベルの整理・作成</p>
-      <%= link_to "タグ設定へ", tags_path, style: "display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #6c757d; color: white; border-radius: 4px; text-decoration: none; font-weight: bold;" %>
-    </div>
-
+  <div style="display: flex; gap: 10px;">
+    <%= link_to "グループ管理", groups_path, style: "padding: 8px 16px; background-color: #007bff; color: white; border-radius: 4px; text-decoration: none;" %>
+    <%= link_to "お知らせ・通知", notifications_path, style: "padding: 8px 16px; background-color: #17a2b8; color: white; border-radius: 4px; text-decoration: none;" %>
+    <%= link_to "反省会・振り返り", post_mortems_path, style: "padding: 8px 16px; background-color: #6c757d; color: white; border-radius: 4px; text-decoration: none;" %>
   </div>
 </div>
