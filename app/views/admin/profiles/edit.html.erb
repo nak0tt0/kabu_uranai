@@ -1,0 +1,42 @@
+<div style="padding: 20px; max-width: 500px; margin: 0 auto;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2>管理者プロフィール編集</h2>
+    <%= link_to "ダッシュボードに戻る", admin_dashboard_path, style: "color: #007bff; text-decoration: none;" %>
+  </div>
+
+  <% if @admin.errors.any? %>
+    <div style="color: #dc3545; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 4px; margin-bottom: 20px;">
+      <ul style="margin: 0; padding-left: 20px;">
+        <% @admin.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with model: @admin, url: admin_profile_path, method: :patch, local: true do |f| %>
+    <div style="margin-bottom: 15px;">
+      <%= f.label :name, "名前", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+      <%= f.text_field :name, style: "width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" %>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <%= f.label :email, "メールアドレス", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+      <%= f.email_field :email, required: true, style: "width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" %>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <%= f.label :password, "新しいパスワード（変更する場合のみ）", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+      <%= f.password_field :password, style: "width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" %>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <%= f.label :password_confirmation, "新しいパスワード（確認用）", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+      <%= f.password_field :password_confirmation, style: "width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" %>
+    </div>
+
+    <div>
+      <%= f.submit "更新する", style: "width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;" %>
+    </div>
+  <% end %>
+</div>
