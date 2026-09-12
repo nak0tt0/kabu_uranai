@@ -24,8 +24,11 @@ Rails.application.routes.draw do
   # プロフィール編集・更新・退会 (単数形 resource)
   resource :user, only: [:edit, :update, :destroy]
 
-  # 保有/保留 銘柄管理（CRUD）
+  # 保有/保留 銘柄管理（CRUD）& CSVインポート
   resources :stocks do
+    collection do
+      post :import
+    end
     # 銘柄ごとの振り返り（事後検証）新規作成・保存（ネスト）
     resources :post_mortems, only: [:new, :create]
   end
