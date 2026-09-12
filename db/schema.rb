@@ -24,7 +24,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_09_174621) do
 
   create_table "groups", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.string "name"
+    t.string "name", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_groups_on_user_id"

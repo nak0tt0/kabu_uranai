@@ -2,38 +2,33 @@ import sys
 import json
 import yfinance as yf
 
-def get_stock_data(symbol):
+def get_price(symbol):
     try:
-        stock = yf.Ticker(symbol)
-        info = stock.info
-        hist = stock.history(period='2d')
+        ticker = yf.Ticker(symbol)
+        info = ticker.info
+        
+        # currentPrice または regularMarketPrice を取得
+        price = info.get('currentPrice') or info.get('regularMarketPrice')
+        
+        if price is None:
+            # バックアップ：直近1日の終値を取得
+            hist = ticker.history(period="1d")
+            if not hist.empty:
+                price = float(hist['Close'].iloc[-1])
 
-        # リアルタイム価格または最新価格の取得
-        current_price = info.get('currentPrice') or info.get('regularMarketPrice')
+        if price is None:
+            print(json.dumps({"error": "Price not found"}))
+            return
 
-        if len(hist) >= 1:
-            latest_close = hist['Close'].iloc[-1]
-            prev_close = hist['Close'].iloc[-2] if len(hist) >= 2 else latest_close
-            price = current_price if current_price is not None else latest_close
-            change_ratio = ((price - prev_close) / prev_close) * 100
-        else:
-            price = current_price if current_price is not None else 0.0
-            change_ratio = 0.0
-
-        name = info.get('shortName') or info.get('longName') or symbol
-
-        return {
-            "symbol": symbol,
-            "name": name,
-            "current_price": float(price),
-            "change_ratio": float(change_ratio)
-        }
+        print(json.dumps({
+            "current_price": round(float(price), 2),
+            "symbol": symbol
+        }))
     except Exception as e:
-        return {"error": str(e)}
+        print(json.dumps({"error": str(e)}))
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        data = get_stock_data(sys.argv[1])
-        print(json.dumps(data))
+        get_price(sys.argv[1])
     else:
-        print(json.dumps({"error": "No ticker symbol provided"}))
+        print(json.dumps({"error": "No symbol provided"}))
